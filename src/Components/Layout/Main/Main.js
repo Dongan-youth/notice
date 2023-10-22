@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from '../Header/Header.js';
 
-const Main = ({ children }) => {
+const Main = () => {
   return (
-    <div className='w-full h-screen pl-[17.5rem] py-3 pr-3 '>
+    <div className='w-full h-screen pl-[15%] py-3 pr-3 '>
       <div className='w-full h-full rounded-2xl bg-white'>
-        { children }
+        <Header/>
       </div>
     </div>
   );
