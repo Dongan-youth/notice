@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Menu = ({ MenuImageURL, MenuName }) => {
-  const [isHovered, setIsHovered] = useState(false);
 
-  const buttonStyle ={
-    backgroundColor: isHovered ? '#F6F6F9' : '',
-    borderColor: isHovered ? '#CACAD0' : '',
-    border: isHovered ? '1.5px solid' : '',
-    borderRounded: isHovered ? '[0.75rem]' : ''
-  };
-  
   return (
-    <button className='flex justify-center items-center w-[13.75rem] h-[3.5625rem] rounded-xl m-1' style={ buttonStyle } onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-        <div className='flex justify-start items-center w-[12.25rem] h-[2.3125rem] px-3 py-[0.63rem]'>
+        <button className='flex justify-center items-center w-full h-[7vh] rounded-xl hover:bg-[#F6F6F9] hover:border-[#CACAD0] hover:border hover:border-solid'>
+        <div className='flex justify-start items-center w-full h-full px-3 py-[0.63rem]'>
           <div className='flex float-left pr-5'>
-            <img src={MenuImageURL} alt="Menu"></img>
+            <img src={MenuImageURL} alt="Menu" className='w-[1.5vw]'></img>
           </div>
           <div className='flex text-center justify-center items-center'>
-            <p className=' text-[#7D8DA7] text-lg font-bold font-[Inter] leading-[2.3125rem]'>{MenuName}</p>
+            <p className=' text-[#7D8DA7] text-xm font-bold font-[Inter] leading-[2.3125rem]'>{MenuName}</p>
           </div>
         </div>
     </button>
