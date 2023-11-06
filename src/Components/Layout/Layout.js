@@ -1,8 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Sidebar from './Sidebar/Sidebar';
+import Main from './Main/Main';
 
-const Layout = () => {
+const Layout = ({ children }) => {
   return (
-    <div>Layout</div>
+    <div className='w-full min-h-screen bg-[#F6F6F9]'>
+      <Sidebar/>
+      <Main>
+        {children}
+      </Main>
+    </div>
   )
 }
 
