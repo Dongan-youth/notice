@@ -9,6 +9,7 @@ import LoginP from "./Pages/PC/LoginP"
 import JoinP from "./Pages/PC/JoinP";
 import MyPageP from "./Pages/PC/MyPageP";
 import Menu1P from "./Pages/PC/Menu1P";
+import Menu2P from "./Pages/PC/Menu2P";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -42,7 +43,7 @@ function App() {
           <Route path="/join" element={<JoinP/>} />
           <Route path="/mypage" element={<MyPageP/>}/>
           <Route path="/online-notice" element={<Menu1P/>}/>
-          {/* <Route path="/photos-and-videos" element={<Menu2/>}/> */}
+          <Route path="/photos-and-videos" element={<Menu2P/>}/>
         </Routes>
       </BrowserRouter>
     )
