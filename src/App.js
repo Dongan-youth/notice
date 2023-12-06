@@ -38,8 +38,8 @@ function App() {
     return(
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPageP/>} />
-          <Route path="/login" element={<LoginP/>} />
+          <Route path="/main" element={<MainPageP/>} />
+          <Route path="/" element={<LoginP/>} />
           <Route path="/join" element={<JoinP/>} />
           <Route path="/mypage" element={<MyPageP/>}/>
           <Route path="/online-notice" element={<Menu1P/>}/>
