@@ -2,7 +2,7 @@ import React from 'react'
 
 const MainPageP = () => {
   return (
-    <div></div>
+    <div>MainPageP</div>
   )
 }
 
