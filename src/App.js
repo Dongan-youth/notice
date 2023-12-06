@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // 임시 파일 이름 추후 회의 후 결정
-import MainPageP from './Pages/PC/MainPageP'
-import MainPageM from './Pages/Mobile/MainPageM'
-import LoginP from "./Pages/PC/LoginP"
+import MainPageP from "./Pages/PC/MainPageP";
+import MainPageM from "./Pages/Mobile/MainPageM";
+import LoginP from "./Pages/PC/LoginP";
 import JoinP from "./Pages/PC/JoinP";
 import MyPageP from "./Pages/PC/MyPageP";
 import Menu1P from "./Pages/PC/Menu1P";
@@ -26,27 +26,27 @@ function App() {
     };
   }, []);
 
-  if(isMobile){
+  if (isMobile) {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPageM/>} />
+          <Route path="/" element={<MainPageM />} />
         </Routes>
       </BrowserRouter>
-    )
-  }else{
-    return(
+    );
+  } else {
+    return (
       <BrowserRouter>
         <Routes>
-          <Route path="/main" element={<MainPageP/>} />
-          <Route path="/" element={<LoginP/>} />
-          <Route path="/join" element={<JoinP/>} />
-          <Route path="/mypage" element={<MyPageP/>}/>
-          <Route path="/online-notice" element={<Menu1P/>}/>
-          <Route path="/photos-and-videos" element={<Menu2P/>}/>
+          <Route path="/main" element={<MainPageP />} />
+          <Route path="/" element={<LoginP />} />
+          <Route path="/join" element={<JoinP />} />
+          <Route path="/mypage" element={<MyPageP />} />
+          <Route path="/online-notice" element={<Menu1P />} />
+          <Route path="/photos-and-videos" element={<Menu2P />} />
         </Routes>
       </BrowserRouter>
-    )
+    );
   }
 }
 
