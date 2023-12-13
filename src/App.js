@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import UserStore from "./Stores/UserStore";
-import { auth } from "./firebase";
+import { auth } from "./firebase_local";
 import { onAuthStateChanged } from "firebase/auth";
 
 // 임시 파일 이름 추후 회의 후 결정
