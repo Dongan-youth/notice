@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../../Components/PC/Layout/Layout'
 
 const MainPageP = () => {
   return (
-    <div>MainPageP</div>
+    <Layout></Layout>
   )
 }
 
