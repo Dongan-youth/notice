@@ -1,14 +1,14 @@
-import React from 'react'
-import Login from '../../Components/PC/Login/Login.js'
+import React from "react";
+import Login from "../../Components/PC/Login/Login.js";
 
 const LoginP = () => {
   return (
-    <div className='flex justify-center items-center w-full h-screen overflow-hidden p-3'>
-        <div className='flex justify-center items-center w-full h-full bg-[#FFFFFF] rounded-2xl'>
-            <Login/>
-        </div>
+    <div className="w-full min-h-screen flex flex-col bg-[#F6F6F9] p-3">
+      <div className="w-full h-full flex-grow flex justify-center bg-white rounded-2xl">
+        <Login />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginP
+export default LoginP;
