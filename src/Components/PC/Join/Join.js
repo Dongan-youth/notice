@@ -160,7 +160,7 @@ const Join = () => {
           이미 아이디가 있다면...
         </span>
         <Link
-          to={"/login"}
+          to={"/"}
           className="text-[#6D7A8F] text-[0.9375rem] font-bold font-[Inter]"
           onClick={handleSubmit}
         >
