@@ -1,9 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import LoginHover from './LoginHover.js'
 
 const ProfileBtn = () => {
-
   const [ isHovered, setIsHovered ] = useState(false);
   
   const handleMouseEnter = () => {
@@ -15,12 +13,16 @@ const ProfileBtn = () => {
   };
 
   return (
-    <button className={`relative top-[0.28rem] justify-center items-center rounded-full w-[3.5rem] h-[3.5rem] mr-[1.12rem] mb-[0.38rem] shadow-[] border-[2px] ${isHovered ? 'hovered' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <button className='relative top-[0.19rem] left-[0.04rem] bg-white'>
-        <img src='LoginImage.png' alt='Login' className='flex w-[1.5rem]'></img>
-      </button>
-      { isHovered && <LoginHover/> }
-    </button>
+    <div className='relative flex justify-center items-center'>
+      <div
+        className='aspect-square w-full max-w-[3.25rem] flex justify-center items-center rounded-full border-2 border-[#D2D2D2] cursor-pointer'
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <img src='LoginImage.png' alt='Login' className='max-w-[1.5rem]'/>
+      </div>
+      { isHovered && <LoginHover /> }
+    </div>
   )
 }
 
