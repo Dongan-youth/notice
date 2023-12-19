@@ -8,7 +8,7 @@ const MenuList = () => {
   ];
 
   return (
-    <div className='flex flex-col justify-center items-center w-full h-[8.5rem] px-3 gap-[1.5vh]'>
+    <div className='row-span-2 grid grid-rows-2 gap-3 my-3'>
       <Menu MenuImageURL={menuData[0].imageURL} MenuName={menuData[0].text}/>
       <Menu MenuImageURL={menuData[1].imageURL} MenuName={menuData[1].text}/>
     </div>

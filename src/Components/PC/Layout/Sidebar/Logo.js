@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Logo = () => {
   return (
-    <button className='flex justify-center items-center w-full h-[6.1875rem] px-3'>
-      <img className='w-full h-auto' src="Youth2_logo.png" alt="Youth2 logo"></img>
-    </button>
+    <Link to={'/'} className='flex items-center border-b border-stone-300'>
+      <img src="Youth2_logo.png" alt="Youth2 logo"></img>
+    </Link>
   )
 }
 

@@ -4,11 +4,9 @@ import MenuList from './MenuList';
 
 const Sidebar = () => {
   return (
-    <div className='absolute left-0 top-0 min-h-screen h-full w-[15%] p-3'>
-        <div className='w-full h-full rounded-2xl bg-white flex flex-col items-center justify-start gap-[2.5vh]'>
-            <Logo />
-            <MenuList/>
-        </div>
+    <div className='grid grid-rows-[repeat(10,minmax(0,1fr))] gap-3 rounded-2xl px-3 bg-white'>
+      <Logo />
+      <MenuList />
     </div>
   );
 };

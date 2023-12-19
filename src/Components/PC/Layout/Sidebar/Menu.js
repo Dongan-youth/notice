@@ -1,19 +1,15 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Menu = ({ MenuImageURL, MenuName }) => {
-
   return (
-        <button className='flex justify-center items-center w-full h-[7vh] rounded-xl hover:bg-[#F6F6F9] hover:border-[#CACAD0] hover:border hover:border-solid'>
-        <div className='flex justify-start items-center w-full h-full px-3 py-[0.63rem]'>
-          <div className='flex float-left pr-5'>
-            <img src={MenuImageURL} alt="Menu" className='w-[1.5vw]'></img>
-          </div>
-          <div className='flex text-center justify-center items-center'>
-            <p className=' text-[#7D8DA7] text-xm font-bold font-[Inter] leading-[2.3125rem]'>{MenuName}</p>
-          </div>
-        </div>
-    </button>
-  )
-}
+    <Link to={'/'} className="grid grid-cols-4 gap-3 p-3 items-center rounded-xl hover:bg-[#F6F6F9] hover:border-[#CACAD0] hover:border-2 hover:border-solid">
+      <img src={MenuImageURL} alt="Menu" className="w-7" />
+      <span className="col-span-3 text-[#7D8DA7] text-lg text-center font-semibold font-[Inter]">
+        { MenuName }
+      </span>
+    </Link>
+  );
+};
 
-export default Menu
+export default Menu;

@@ -3,10 +3,10 @@ import Header from "../Header/Header.js";
 
 const Main = ({ children }) => {
   return (
-    <div className="w-full h-screen pl-[15%] py-3 pr-3 ">
-      <div className="w-full h-full rounded-2xl bg-white">
-        <Header />
-        <div>{children}</div>
+    <div className="grid grid-rows-[repeat(10,minmax(0,1fr))] gap-3 bg-white col-span-5 rounded-2xl">
+      <Header />
+      <div className="row-[span_9_/_span_9]">
+        { children }
       </div>
     </div>
   );
