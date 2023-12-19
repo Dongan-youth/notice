@@ -1,8 +1,11 @@
 import React from "react";
 
-const LoginHover = () => {
+const HoverCard = ({ isHovered, setIsHovered }) => {
   return (
-    <div className="absolute top-16 right-7 w-36 h-36 p-3 bg-[#F6F6F9] rounded-xl shadow-md">
+    <div
+      className="absolute top-16 right-7 w-36 h-36 p-3 bg-[#F6F6F9] rounded-xl shadow-md"
+      onMouseLeave={() => setIsHovered({...isHovered, hoverCard: false })}
+    >
       <div className="w-full h-full rounded-xl grid grid-rows-2 bg-white">
         <div className="flex gap-3 p-3 items-center rounded-t-xl cursor-pointer hover:bg-gray-50">
           <img src="Mypage.png" alt="Mypage" className="w-6" />
@@ -21,4 +24,4 @@ const LoginHover = () => {
   );
 };
 
-export default LoginHover;
+export default HoverCard;
