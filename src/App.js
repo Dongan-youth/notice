@@ -1,52 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import UserStore from "./Stores/UserStore";
+import { auth } from "./firebase_local";
+import { onAuthStateChanged } from "firebase/auth";
 
 // 임시 파일 이름 추후 회의 후 결정
-import MainPageP from './Pages/PC/MainPageP'
-import MainPageM from './Pages/Mobile/MainPageM'
-import LoginP from "./Pages/PC/LoginP"
+import MainPageP from "./Pages/PC/MainPageP";
+import LoginP from "./Pages/PC/LoginP";
 import JoinP from "./Pages/PC/JoinP";
 import MyPageP from "./Pages/PC/MyPageP";
 import Menu1P from "./Pages/PC/Menu1P";
 import Menu2P from "./Pages/PC/Menu2P";
 
 function App() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const navigate = useNavigate();
+  const { user , setUser, clearUser} = UserStore();
 
   useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 768);
-    }
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/main");
 
-    window.addEventListener("resize", handleResize);
+        // 로그인한 사용자 정보를 global state에 저장
+        setUser(user);
+      }
+      else {
+        navigate("/");
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+        // 로그인 시 저장했던 사용자 정보 삭제
+        clearUser();
+      }
+    });
   }, []);
 
-  if(isMobile){
+  if (user.isLoading) {
+    return <div>...Loading</div>
+  } else {
     return (
-      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPageM/>} />
+          <Route path="/" element={<LoginP />} />
+          <Route path="/join" element={<JoinP />} />
+          <Route path="/main" element={<MainPageP />} />
+          <Route path="/mypage" element={<MyPageP />} />
+          <Route path="/online-notice" element={<Menu1P />} />
+          <Route path="/photos-and-videos" element={<Menu2P />} />
         </Routes>
-      </BrowserRouter>
-    )
-  }else{
-    return(
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPageP/>} />
-          <Route path="/login" element={<LoginP/>} />
-          <Route path="/join" element={<JoinP/>} />
-          <Route path="/mypage" element={<MyPageP/>}/>
-          <Route path="/online-notice" element={<Menu1P/>}/>
-          <Route path="/photos-and-videos" element={<Menu2P/>}/>
-        </Routes>
-      </BrowserRouter>
-    )
+    );
   }
 }
 
