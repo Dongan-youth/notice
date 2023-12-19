@@ -162,7 +162,6 @@ const Join = () => {
         <Link
           to={"/"}
           className="text-[#6D7A8F] text-[0.9375rem] font-bold font-[Inter]"
-          onClick={handleSubmit}
         >
           로그인하러가기
         </Link>
