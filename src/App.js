@@ -5,6 +5,8 @@ import UserStore from "./Stores/UserStore";
 import { auth } from "./firebase_local";
 import { onAuthStateChanged } from "firebase/auth";
 
+import { ThemeProvider } from "next-themes";
+
 // 임시 파일 이름 추후 회의 후 결정
 import MainPageP from "./Pages/PC/MainPageP";
 import LoginP from "./Pages/PC/LoginP";
@@ -15,7 +17,7 @@ import Menu2P from "./Pages/PC/Menu2P";
 
 function App() {
   const navigate = useNavigate();
-  const { user , setUser, clearUser} = UserStore();
+  const { user, setUser, clearUser } = UserStore();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -24,8 +26,7 @@ function App() {
 
         // 로그인한 사용자 정보를 global state에 저장
         setUser(user);
-      }
-      else {
+      } else {
         navigate("/");
 
         // 로그인 시 저장했던 사용자 정보 삭제
@@ -35,9 +36,10 @@ function App() {
   }, []);
 
   if (user.isLoading) {
-    return <div>...Loading</div>
+    return <div>...Loading</div>;
   } else {
     return (
+      <ThemeProvider enableSystem={false} attribute="class">
         <Routes>
           <Route path="/" element={<LoginP />} />
           <Route path="/join" element={<JoinP />} />
@@ -46,6 +48,7 @@ function App() {
           <Route path="/online-notice" element={<Menu1P />} />
           <Route path="/photos-and-videos" element={<Menu2P />} />
         </Routes>
+      </ThemeProvider>
     );
   }
 }
