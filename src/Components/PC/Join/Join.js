@@ -27,7 +27,7 @@ const Join = () => {
       <Logo />
       <div className="flex flex-col justify-center items-center w-[19.9375rem] gap-[1.81rem]">
         <TextField
-          id="outlined-basic"
+          id="name"
           name="name"
           label="이름"
           variant="outlined"
@@ -37,7 +37,7 @@ const Join = () => {
           onChange={(e) => setJoinData({ ...joinData, name: e.target.value })}
         />
         <TextField
-          id="outlined-basic"
+          id="email"
           name="email"
           label="이메일"
           variant="outlined"
@@ -47,7 +47,7 @@ const Join = () => {
           onChange={(e) => setJoinData({ ...joinData, id: e.target.value })}
         />
         <TextField
-          id="outlined-basic"
+          id="password"
           name="password"
           type="password"
           label="비밀번호"
@@ -58,8 +58,8 @@ const Join = () => {
           onChange={(e) => setJoinData({ ...joinData, pw: e.target.value })}
         />
         <TextField
-          id="outlined-basic"
-          name="password_confirm"
+          id="password-confirm"
+          name="password-confirm"
           type="password"
           label="비밀번호 확인"
           variant="outlined"
@@ -71,7 +71,7 @@ const Join = () => {
           }
         />
         <TextField
-          id="outlined-basic"
+          id="phone"
           name="phone"
           label="전화번호"
           variant="outlined"
