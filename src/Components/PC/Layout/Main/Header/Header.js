@@ -5,9 +5,8 @@ import ProfileBtn from "./ProfileBtn.js";
 const Header = () => {
   return (
     <div className="w-full h-[4.5rem] flex flex-row justify-end border-b border-stone-300">
+      <ModeBtn />
       <ProfileBtn />
-      {/* <ModeBtn />
-      <ProfileBtn /> */}
     </div>
   );
 };
