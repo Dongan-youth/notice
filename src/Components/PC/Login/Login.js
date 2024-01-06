@@ -4,40 +4,32 @@ import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import { auth } from "../../../firebase_local";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [formError, setFormError] = useState({
-    loginerror: "",
-    emailError: "",
-    passwordError: "",
-  });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const [errorFromSubmit, setErrorFromSubmit] = useState("");
   const [loading, setLoading] = useState(false);
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data) => {
     try {
       setLoading(true);
 
       // Firedase Login
-      await signInWithEmailAndPassword(
-        auth,
-        loginData.email,
-        loginData.password
-      );
+      await signInWithEmailAndPassword(auth, data.email, data.password);
 
       setLoading(false);
     } catch (error) {
-      setFormError({ ...formError, loginerror: error });
+      // 회원가입 에러 발생 시 에러 문구 출력
+      setErrorFromSubmit(error.message);
 
+      // 에러 문구 5초 노출 후 사라짐
       setTimeout(() => {
-        setFormError({
-          loginerror: "",
-          emailError: "",
-          passwordError: "",
-        });
+        setErrorFromSubmit("");
       }, 5000);
     }
   };
@@ -45,7 +37,10 @@ const Login = () => {
   return (
     <div className="flex flex-col justify-center items-center w-[25.5rem] h-[25.1875rem] gap-3">
       <Logo />
-      <div className="flex flex-col justify-center items-center w-[19.9375rem] gap-[1.81rem]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="relative flex flex-col justify-center items-center w-[19.9375rem] gap-[1.81rem]"
+      >
         <TextField
           id="email"
           name="email"
@@ -53,8 +48,7 @@ const Login = () => {
           variant="outlined"
           size="small"
           fullWidth
-          value={loginData.id}
-          onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
         <TextField
           id="password"
@@ -64,21 +58,26 @@ const Login = () => {
           variant="outlined"
           size="small"
           fullWidth
-          value={loginData.pw}
-          onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+          {...register("password", { required: true, minLength: 6 })}
         />
-        <div className="flex flex-row justify-center items-center gap-2 text-[#6D7A8F] text-[0.9375rem]">
-          <Link to={"/"} className="font-bold">
-            아이디찾기
-          </Link>
-          <p>│</p>
-          <Link to={"/"} className="font-bold">
-            비밀번호찾기
-          </Link>
-          <p>│</p>
-          <Link to={"/join"} className="font-bold">
-            회원가입
-          </Link>
+        <div className="absolute bottom-11 left-0 pl-1 text-sm font-medium text-red-500">
+          {errors.email && errors.email.type === "required" && (
+            <span>이메일을 입력해주세요</span>
+          )}
+          {errors.email && errors.email.type === "pattern" && (
+            <span>올바른 이메일을 입력해주세요</span>
+          )}
+          {!errors.email &&
+            errors.password &&
+            errors.password.type === "required" && (
+              <span>비밀번호를 입력해주세요</span>
+            )}
+          {!errors.email &&
+            errors.password &&
+            errors.password.type === "minLength" && (
+              <span>올바른 비밀번호를 입력해주세요</span>
+            )}
+           {errorFromSubmit && <span>{errorFromSubmit}</span>} 
         </div>
         <button
           className="w-[19.9375rem] h-[2.5625rem] bg-[#7D8DA7] rounded-[0.4375rem]"
@@ -89,6 +88,19 @@ const Login = () => {
             LogIn
           </span>
         </button>
+      </form>
+      <div className="flex flex-row justify-center items-center gap-2 my-2 text-[#6D7A8F] text-[0.9375rem]">
+        <Link to={"/"} className="font-bold">
+          아이디찾기
+        </Link>
+        <p>│</p>
+        <Link to={"/"} className="font-bold">
+          비밀번호찾기
+        </Link>
+        <p>│</p>
+        <Link to={"/join"} className="font-bold">
+          회원가입
+        </Link>
       </div>
     </div>
   );
