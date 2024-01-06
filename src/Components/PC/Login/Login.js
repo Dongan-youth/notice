@@ -24,7 +24,7 @@ const Login = () => {
 
       setLoading(false);
     } catch (error) {
-      // 회원가입 에러 발생 시 에러 문구 출력
+      // 로그인 에러 발생 시 에러 문구 출력
       setErrorFromSubmit(error.message);
 
       // 에러 문구 5초 노출 후 사라짐
