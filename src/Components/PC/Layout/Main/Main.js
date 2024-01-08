@@ -1,12 +1,12 @@
 import React from "react";
-import Header from "../Header/Header.js";
+import Header from "./Header/Header.js";
 
 const Main = ({ children }) => {
   return (
-    <div className="grid grid-rows-[repeat(10,minmax(0,1fr))] gap-3 bg-white col-span-5 rounded-2xl">
-      <Header />
-      <div className="row-[span_9_/_span_9]">
-        { children }
+    <div className="absolute top-0 left-0 w-full h-full pl-72 pr-3 py-3">
+      <div className="relative w-full h-full bg-white rounded-2xl">
+        <Header />
+        <div className="absolute top-0 left-0 pt-[4.5rem] w-full h-full">{children}</div>
       </div>
     </div>
   );

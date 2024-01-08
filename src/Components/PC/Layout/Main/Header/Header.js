@@ -4,7 +4,7 @@ import ProfileBtn from "./ProfileBtn.js";
 
 const Header = () => {
   return (
-    <div className="grid grid-cols-9 gap-3 border-b border-stone-300">
+    <div className="w-full h-[4.5rem] flex flex-row justify-end border-b border-stone-300">
       <ModeBtn />
       <ProfileBtn />
     </div>
