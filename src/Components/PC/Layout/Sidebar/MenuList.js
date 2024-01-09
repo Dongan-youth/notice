@@ -8,7 +8,7 @@ const MenuList = () => {
   ];
 
   return (
-    <div className="flex flex-col py-14">
+    <div className="flex flex-col py-10">
       <Menu
         PageUrl={menuData[0].id}
         MenuImageURL={menuData[0].imageURL}

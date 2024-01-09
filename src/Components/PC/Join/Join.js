@@ -1,31 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Login/Logo";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useForm } from "react-hook-form";
 
 const Join = () => {
-  const [joinData, setJoinData] = useState({
-    name: "",
-    id: "",
-    pw: "",
-    pwcheck: "",
-    phonenum: "",
-    job: "",
-    sex: "",
-  });
-  const [job] = useState("");
-  const [sex] = useState("");
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    setValue,
+  } = useForm();
+  const [errorFromSubmit, setErrorFromSubmit] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    setJoinData({ ...joinData, job: job, sex: sex });
-    console.log(joinData);
+  const job = useRef();
+  job.current = watch("job");
+
+  const sex = useRef();
+  sex.current = watch("sex");
+
+  const password = useRef();
+  password.current = watch("password");
+
+  const onSubmit = async (data) => {
+    try {
+      setLoading(true);
+
+      console.log(data);
+
+      setLoading(false);
+    } catch (error) {
+      // 회원가입 에러 발생 시 에러 문구 출력
+      setErrorFromSubmit(error.message);
+
+      // 에러 문구 5초 노출 후 사라짐
+      setTimeout(() => {
+        setErrorFromSubmit("");
+      }, 5000);
+    }
   };
 
   return (
     <div className="flex flex-col justify-center items-center w-[25.5rem] h-[40.9375rem]">
       <Logo />
-      <div className="flex flex-col justify-center items-center w-[19.9375rem] gap-[1.81rem]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="relative flex flex-col justify-center items-center w-[19.9375rem] gap-[1.81rem]"
+      >
         <TextField
           id="name"
           name="name"
@@ -33,8 +57,7 @@ const Join = () => {
           variant="outlined"
           size="small"
           fullWidth
-          value={joinData.name}
-          onChange={(e) => setJoinData({ ...joinData, name: e.target.value })}
+          {...register("name", { required: true, pattern: /^[가-힣]{2,5}$/ })}
         />
         <TextField
           id="email"
@@ -43,8 +66,7 @@ const Join = () => {
           variant="outlined"
           size="small"
           fullWidth
-          value={joinData.id}
-          onChange={(e) => setJoinData({ ...joinData, id: e.target.value })}
+          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
         <TextField
           id="password"
@@ -54,8 +76,7 @@ const Join = () => {
           variant="outlined"
           size="small"
           fullWidth
-          value={joinData.pw}
-          onChange={(e) => setJoinData({ ...joinData, pw: e.target.value })}
+          {...register("password", { required: true, minLength: 6 })}
         />
         <TextField
           id="password-confirm"
@@ -65,26 +86,27 @@ const Join = () => {
           variant="outlined"
           size="small"
           fullWidth
-          value={joinData.pwcheck}
-          onChange={(e) =>
-            setJoinData({ ...joinData, pwcheck: e.target.value })
-          }
+          {...register("password_confirm", {
+            required: true,
+            validate: (value) => value === password.current,
+          })}
         />
         <TextField
-          id="phone"
-          name="phone"
+          id="phone_number"
+          name="phone_number"
           label="전화번호"
           variant="outlined"
           size="small"
           fullWidth
-          value={joinData.phonenum}
-          onChange={(e) =>
-            setJoinData({ ...joinData, phonenum: e.target.value })
-          }
+          {...register("phone_number", {
+            required: true,
+            pattern: /^(010|01[1|6|7|8|9])\d{3,4}\d{4}$/,
+          })}
         />
         <div className="flex flex-row justify-center items-center w-full gap-[0.81rem]">
+          <input className="hidden" {...register("job")}/>
           <div className="w-[9.5625rem]">
-            {joinData.job === "teacher" ? (
+            {job.current === "teacher" ? (
               <Button variant="contained" fullWidth>
                 교사
               </Button>
@@ -92,14 +114,14 @@ const Join = () => {
               <Button
                 variant="outlined"
                 fullWidth
-                onClick={(e) => setJoinData({ ...joinData, job: "teacher" })}
+                onClick={() => setValue("job", "teacher")}
               >
                 교사
               </Button>
             )}
           </div>
           <div className="w-[9.5625rem]">
-            {joinData.job === "student" ? (
+            {job.current === "student" ? (
               <Button variant="contained" fullWidth>
                 학생
               </Button>
@@ -107,7 +129,7 @@ const Join = () => {
               <Button
                 variant="outlined"
                 fullWidth
-                onClick={(e) => setJoinData({ ...joinData, job: "student" })}
+                onClick={() => setValue("job", "student")}
               >
                 학생
               </Button>
@@ -115,8 +137,9 @@ const Join = () => {
           </div>
         </div>
         <div className="flex flex-row justify-center items-center w-full gap-[0.81rem]">
+        <input className="hidden" {...register("sex")}/>
           <div className="w-[9.5625rem]">
-            {joinData.sex === "men" ? (
+            {sex.current === "men" ? (
               <Button variant="contained" fullWidth>
                 남
               </Button>
@@ -124,14 +147,14 @@ const Join = () => {
               <Button
                 variant="outlined"
                 fullWidth
-                onClick={(e) => setJoinData({ ...joinData, sex: "men" })}
+                onClick={() => setValue("sex", "men")}
               >
                 남
               </Button>
             )}
           </div>
           <div className="w-[9.5625rem]">
-            {joinData.sex === "women" ? (
+            {sex.current === "women" ? (
               <Button variant="contained" fullWidth>
                 여
               </Button>
@@ -139,22 +162,100 @@ const Join = () => {
               <Button
                 variant="outlined"
                 fullWidth
-                onClick={(e) => setJoinData({ ...joinData, sex: "women" })}
+                onClick={() => setValue("sex", "women")}
               >
                 여
               </Button>
             )}
           </div>
+        </div>
+        <div className="absolute left-0 pl-1 text-sm font-medium text-red-500 bottom-11">
+          {/* 이름 ErrorText */}
+          {errors.name && errors.name.type === "required" && (
+            <span>이름을 입력해주세요</span>
+          )}
+          {errors.name && errors.name.type === "pattern" && (
+            <span>올바른 이름을 입력해주세요</span>
+          )}
+          {/* 이메일 ErrorText */}
+          {!errors.name && errors.email && errors.email.type === "required" && (
+            <span>이메일을 입력해주세요</span>
+          )}
+          {!errors.name && errors.email && errors.email.type === "pattern" && (
+            <span>올바른 이메일을 입력해주세요</span>
+          )}
+          {/* 비밀번호 ErrorText */}
+          {!errors.name &&
+            !errors.email &&
+            errors.password &&
+            errors.password.type === "required" && (
+              <span>비밀번호를 입력해주세요</span>
+            )}
+          {!errors.name &&
+            !errors.email &&
+            errors.password &&
+            errors.password.type === "minLength" && (
+              <span>비밀번호는 최소 6자 이상이어합니다</span>
+            )}
+          {/* 비밀번호 확인 ErrorText */}
+          {!errors.name &&
+            !errors.email &&
+            !errors.password &&
+            errors.password_confirm &&
+            errors.password_confirm.type === "required" && (
+              <span>비밀번호 확인을 입력해주세요</span>
+            )}
+          {!errors.name &&
+            !errors.email &&
+            !errors.password &&
+            errors.password_confirm &&
+            errors.password_confirm.type === "validate" && (
+              <span>비밀번호가 다르니 다시 입력해주세요</span>
+            )}
+          {/* 전화번호 ErrorText */}
+          {!errors.name &&
+            !errors.email &&
+            !errors.password &&
+            !errors.password_confirm &&
+            errors.phone_number &&
+            errors.phone_number.type === "required" && (
+              <span>전화번호를 입력해주세요</span>
+            )}
+          {!errors.name &&
+            !errors.email &&
+            !errors.password &&
+            !errors.password_confirm &&
+            errors.phone_number &&
+            errors.phone_number.type === "pattern" && (
+              <span>올바른 전화번호를 입력해주세요</span>
+            )}
+          {/* 직업 ErrorText */}
+          {!errors.name &&
+            !errors.email &&
+            !errors.password &&
+            !errors.password_confirm &&
+            !errors.phone_number &&
+            job.current === '' && <span>직업을 선택해주세요</span>}
+          {/* 성별 ErrorText */}
+          {!errors.name &&
+            !errors.email &&
+            !errors.password &&
+            !errors.password_confirm &&
+            !errors.phone_number &&
+            !errors.job &&
+            sex.current === '' && <span>성별을 선택해주세요</span>}
+          {errorFromSubmit && <span>{errorFromSubmit}</span>}
         </div>
         <button
           className="w-[19.9375rem] h-[2.5625rem] bg-[#7D8DA7] rounded-[0.4375rem]"
           onClick={handleSubmit}
+          disabled={loading}
         >
           <span className="text-[#FFFFFF] text-[1.25rem] font-bold font-[Inter]">
             Join
           </span>
         </button>
-      </div>
+      </form>
       <div className="flex flex-row w-[15.1875rem] gap-[0.25rem] mt-[0.81rem]">
         <span className="text-[#6D7A8F] text-[0.9375rem] font-normal font-[Inter]">
           이미 아이디가 있다면...
