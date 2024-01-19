@@ -4,7 +4,7 @@ import Main from './Main/Main';
 
 const Layout = ({ children }) => {
   return (
-    <div className='w-full h-full min-h-screen bg-[#F6F6F9]'>
+    <div className='w-full h-full min-h-screen'>
       <Sidebar/>
       <Main>
         {children}
