@@ -16,9 +16,9 @@ const ProfileBtn = () => {
   };
 
   return (
-    <div className='relative flex justify-center items-center'>
+    <div className='relative my-auto px-6'>
       <div
-        className='aspect-square w-full max-w-[3.25rem] flex justify-center items-center rounded-full border-2 border-[#D2D2D2] cursor-pointer'
+        className='h-14 aspect-square flex justify-center items-center rounded-full border-2 border-[#D2D2D2] cursor-pointer'
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setIsHovered({...isHovered, profile: false})}
       >

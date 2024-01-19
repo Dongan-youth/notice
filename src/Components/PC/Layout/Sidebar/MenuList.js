@@ -8,7 +8,7 @@ const MenuList = () => {
   ];
 
   return (
-    <div className="row-span-2 grid grid-rows-2 gap-3 my-3">
+    <div className="flex flex-col py-10">
       <Menu
         PageUrl={menuData[0].id}
         MenuImageURL={menuData[0].imageURL}

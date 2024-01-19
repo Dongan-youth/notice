@@ -11,7 +11,6 @@ const Join = () => {
     formState: { errors },
     handleSubmit,
     watch,
-    getValues,
     setValue,
   } = useForm();
   const [errorFromSubmit, setErrorFromSubmit] = useState("");
@@ -170,7 +169,7 @@ const Join = () => {
             )}
           </div>
         </div>
-        <div className="absolute bottom-11 left-0 pl-1 text-sm font-medium text-red-500">
+        <div className="absolute left-0 pl-1 text-sm font-medium text-red-500 bottom-11">
           {/* 이름 ErrorText */}
           {errors.name && errors.name.type === "required" && (
             <span>이름을 입력해주세요</span>
